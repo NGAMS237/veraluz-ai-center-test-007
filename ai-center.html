@@ -370,6 +370,14 @@ function showSection(id){
   var el = document.getElementById(target);
   if (el) el.classList.add('active');
   render(id);
+  // §15 — chaque section de données se rafraîchit à l'ouverture (pas
+  // seulement après une mutation), sans recharger toute la page.
+  if (!STANDALONE) {
+    if (id === 'alertes') refreshAlerts();
+    else if (id === 'approbations') refreshApprovals();
+    else if (id === 'historique') refreshHistory();
+    else if (id === 'accueil' || id === 'assistants') refreshAgents();
+  }
 }
 
 function render(id){
